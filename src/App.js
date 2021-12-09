@@ -10,9 +10,8 @@ function App() {
 
   useEffect(() => {
     dataBase.collection('posts').onSnapshot(snapshot => {
-      setPosts(snapshot.docs.map(doc => doc.data()));
-    }
-    );
+      setPosts(snapshot.docs.map(doc => ({ id: doc.id, post: doc.data() })));
+    }, []);
   }, []);
 
 
