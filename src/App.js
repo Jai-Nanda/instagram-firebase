@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react';
 import Post from './components/Post';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { dataBase } from './Firebase';
+import { dataBase } from './firebase';
 function App() {
   const { posts, setPosts } = useState([]);
 
   useEffect(() => {
-    db.collection('posts').onSnapshot(snapshot => {
+    dataBase.collection('posts').onSnapshot(snapshot => {
       setPosts(snapshot.docs.map(doc => doc.data()));
     }
     );
