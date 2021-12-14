@@ -1,6 +1,7 @@
 import React from 'react';
 import './Post.css';
-const Post = ( { username , caption , imageUrl } ) => {
+import { db } from '../firebase';
+const Post = ({ username, caption, imageUrl }) => {
     return (
         <div className="post">
             <div className="photo">
