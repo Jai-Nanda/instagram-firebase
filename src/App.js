@@ -4,23 +4,35 @@ import { useState, useEffect } from 'react';
 import Post from './components/Post';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { dataBase } from './firebase';
+import { db } from './firebase';
+import SignUp from './components/SignUp';
 function App() {
-  const { posts, setPosts } = useState([]);
+  // const { posts, setPosts } = useState([]);
+  // useEffect(() => {
+  //   db.collection('posts').onSnapshot(snapshot => {
+  //     setPosts(snapshot.docs.map(doc => ({ id: doc.id, post: doc.data() })));
+  //   }, []);
+  // }, []);
 
+  const { posts, setPosts } = useState([]);
   useEffect(() => {
-    dataBase.collection('posts').onSnapshot(snapshot => {
+    db.collection('posts').onSnapshot(snapshot => {
       setPosts(snapshot.docs.map(doc => ({ id: doc.id, post: doc.data() })));
     }, []);
   }, []);
 
-
   return (
     
     <>
-      
-      <Navbar />  
-      {
+      <BrowserRouter>
+        <Navbar />
+        <Post/>
+        <Routes>
+          
+          <Route path="/SignUp" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
+      {/* {
         posts.map(post => (
           <Post
             username={post.username}
@@ -28,7 +40,7 @@ function App() {
             imageUrl={post.imageUrl}
           />
         ))
-      }
+      } */}
     </>
 
   );
